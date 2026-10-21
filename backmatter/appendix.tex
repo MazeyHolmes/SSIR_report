@@ -1,11 +1,11 @@
 \appendix
-\chapter*{附录}
-\addcontentsline{toc}{chapter}{附录}
+\section*{附录}
+\addcontentsline{toc}{section}{附录}
 
 \newcounter{appendixsection}
 \newcommand{\appendixsection}[1]{%
   \refstepcounter{appendixsection}%
-  \section*{附录\Alph{appendixsection}\quad #1}%
+  \subsection*{附录\Alph{appendixsection}\quad #1}%
 }
 
 \appendixsection{操作域上的非线性}
@@ -13,7 +13,7 @@ DNN组件产生输入依赖的局部响应，这些响应跨特征混合并跨�
 \begin{equation}
 J_{f_\theta}(x) = W^{(L+1)} D^{(L)}(x) W^{(L)} \cdots D^{(1)}(x) W^{(1)}, \tag{21}
 \end{equation}
-其中\(W^{(l)}\)是权重矩阵，\(D^{(l)}(x)\)包含在当前预激活处的激活导数。对于ReLU网络，局部仿射映射可以跨越激活区域发生变化，其数量取决于架构[1]。
+其中\(W^{(l)}\)是权重矩阵，\(D^{(l)}(x)\)包含在当前预激活处的激活导数。对于ReLU网络，局部仿射映射可以跨越激活区域发生变化，其数量取决于架构\supercite{10-szegedy-et-al-2014}。
 
 令\(G(i) = (\overline{l_{s_1}(i)}, \ldots, \overline{l_{s_\ell}(i)})\)表示选定神经元的分组响应。如果单个仿射映射在包含被比较输入的定义域上描述\(G\)，那么
 \begin{equation}
@@ -55,7 +55,7 @@ F_k(p_n) = S_t \iff p_n + k \in \Omega_{S_t}. \tag{27}
 这是下文使用的正确性关系。截断使优化和恢复期间使用的图像表示一致，而约定的评估约定确定状态映射。
 
 \appendixsection{概率密文图像生成的进一步分析}
-\subsection*{A. 成功输出分布}
+\subsubsection*{A. 成功输出分布}
 令 \(\mathcal{R} = \mathrm{supp}(D_R)\) 且 \(\Xi = \mathrm{supp}(D_\Xi)\)，并令 \(\mathrm{Succ}\) 表示成功终止。每次尝试独立采样 \(r\) 和 \(\xi\)。对于固定的 \(k, m\)，成功执行中初始图像的分布为
 \begin{equation}
 w_{k,m}(r) = \frac{D_R(r) \Pr[\mathrm{Succ} \mid k, m, r]}{\Pr[\mathrm{Succ} \mid k, m]}. \tag{29}
@@ -68,7 +68,7 @@ p_{k,m}(c) &= \sum_{r \in \mathcal{R}_{k,m}} w_{k,m}(r) p_{k,m,r}(c),
 \end{aligned} \tag{30}
 \end{equation}
 其中第一个概率是对 \(\xi \leftarrow D_\Xi\) 取的。这些分布是归一化的，并且成功输出预言机的独立调用独立地采样 \(p_{k,m}\)。
-\subsection*{B. 碰撞贡献与一致界}
+\subsubsection*{B. 碰撞贡献与一致界}
 
 定义来自不同初始图像的输出分布之间的最大重叠为
 \begin{equation}
@@ -101,7 +101,7 @@ p_{k,m}(c) &= \sum_{r \in \mathcal{R}_{k,m}} w_{k,m}(r) p_{k,m,r}(c),
 泄漏损失倾向于使图像与初始图像相似，而独立采样的R-FGSM状态则改变更新轨迹。碰撞量刻画了所选配置下得到的输出分布。
 
 \appendixsection{IND-CPA优势界与查询限制}
-\subsection*{A. 参考分布与转录偏差}
+\subsubsection*{A. 参考分布与转录偏差}
 
 令 \(N = |\mathcal{M}|\)，\(\pi(k) = \Pr[\mathrm{KeyGen}() = k]\)，并定义
 \begin{equation}
@@ -117,7 +117,7 @@ p_{k,m}(c) &= \sum_{r \in \mathcal{R}_{k,m}} w_{k,m}(r) p_{k,m,r}(c),
 
 对于挑战条目，\(m_i\) 仅表示实际消息 \(m_b\) 以计算记录似然。
 
-\subsection*{B. 混合游戏}
+\subsubsection*{B. 混合游戏}
 
 令 \(G_0\) 为真实的IND-CPA游戏。正确性意味着 \(p_{k,u}(c) > 0 \Rightarrow \mathrm{DEC}_k(c) = u\)。因此，对于固定密钥，不同消息具有不相交的成功输出支撑，并且
 \begin{equation}
@@ -136,7 +136,7 @@ p_{k,m}(c) = N \bar{p}_k(c) \mathbf{1}[\mathrm{DEC}_k(c) = m],
 
 每个真实记录都具有正参考似然。因此，式37将无碰撞贡献的统计距离上界限制为 \(\eta_q/2\)，包括在自适应消息选择下。
 
-\subsection*{C. 重复输出与证明完成}
+\subsubsection*{C. 重复输出与证明完成}
 
 令 \(\mathrm{Coll}\) 表示至多 \(q\) 个生成输出中的重复输出。在 \(G_1\) 中，不同消息的输出不能重合。对于 \(i < j\)，以密钥、对手随机性、挑战比特以及输出 \(i\) 之前的历史为条件。记 \(p(c) = p_{k,m_i}(c)\)，并令 \(a_c \in [0,1]\) 为请求 \(j\) 发生且目标为 \(m_i\) 的条件概率，给定 \(c_i = c\)。请求 \(j\) 处的新随机性给出
 \begin{equation}
@@ -157,7 +157,7 @@ p_{k,m}(c) = N \bar{p}_k(c) \mathbf{1}[\mathrm{DEC}_k(c) = m],
 \end{equation}
 这里 \(\Delta\) 表示统计距离。对手在 \(G_2\) 中的视图独立于 \(b\)。由于 \(G_0 \equiv G_1\)，相同的界适用于真实游戏中的优势，从而证明定理1。
 
-\subsection*{D. 可接受的生成查询限制}
+\subsubsection*{D. 可接受的生成查询限制}
 
 选择非负预算 \(\varepsilon_{\mathrm{mix}}, \varepsilon_{\mathrm{col}}\)，其中 \(\varepsilon_{\mathrm{sec}} = \varepsilon_{\mathrm{mix}} + \varepsilon_{\mathrm{col}} < 1/2\)。如果
 \begin{equation}
@@ -175,7 +175,7 @@ p_{k,m}(c) = N \bar{p}_k(c) \mathbf{1}[\mathrm{DEC}_k(c) = m],
 
 \appendixsection{IND-CCA1优势界与恢复限制}
 
-\subsection*{A. 同密钥与分裂密钥预言机游戏}
+\subsubsection*{A. 同密钥与分裂密钥预言机游戏}
 
 两个游戏都采样 \(k \leftarrow \mathrm{KeyGen}()\) 用于生成。分裂密钥游戏还采样一个独立的 \(\bar{k} \leftarrow \mathrm{KeyGen}()\)，并在整个游戏过程中固定。区分者可以交错进行生成和恢复查询，直到它关闭恢复阶段；此后仅允许生成查询。这些辅助游戏没有外部挑战比特。
 
@@ -194,7 +194,7 @@ m, & (x, m) \in \mathrm{T}_{\mathrm{enc}}, \\
 \end{equation}
 其中 \(\mathcal{D}\) 遍历概率多项式时间区分者，它们在关闭恢复阶段前最多接收 \(q\) 个生成输出并最多进行 \(q_d\) 次恢复查询。
 
-\subsection*{B. 归约到IND-CPA}
+\subsubsection*{B. 归约到IND-CPA}
 
 构造一个IND-CPA对手 \(\mathcal{A}\)，它运行 \(\mathcal{A}'\)，将其生成查询转发给CPA预言机，并将其挑战对转发给CPA挑战者。它独立采样 \(\bar{k}\)，并使用式45中的分裂密钥规则和本地表回答挑战前恢复查询。挑战前生成消息对模拟器已知。未知的挑战消息不需要，因为恢复查询在挑战前结束。
 
@@ -210,7 +210,7 @@ m, & (x, m) \in \mathrm{T}_{\mathrm{enc}}, \\
 \end{equation}
 代入定理1即证明式19。
 
-\subsection*{C. 命中事件之外的似然偏差}
+\subsubsection*{C. 命中事件之外的似然偏差}
 
 固定区分者的随机性和一个完整的有序转录 \(\tau\)，包括恢复阶段的关闭。提取记录
 \begin{equation}
@@ -236,7 +236,7 @@ R(\tau) = \frac{\sum_k \pi(k) L_E(k) L_D(k)}{\left( \sum_k \pi(k) L_E(k) \right)
 \end{equation}
 对于完整的有序转录，自适应查询选择因子相互抵消。每个正的同密钥似然都有正的分裂密钥似然。因此，\(\mathrm{Hit}\) 之外的转录对统计距离的贡献至多为 \(\zeta_{q, q_d} / 2\)。
 
-\subsection*{D. 命中概率与恢复查询限制}
+\subsubsection*{D. 命中概率与恢复查询限制}
 
 定义 \(\mu_{\mathrm{enc}} = \max_{k,m,c} p_{k,m}(c)\)。由于 \(p_{k,m}(c)^2 \le \sum_z p_{k,m}(z)^2 \le \varepsilon_{\mathrm{prob}}\)，
 \begin{equation}
@@ -266,4 +266,3 @@ R(\tau) = \frac{\sum_k \pi(k) L_E(k) L_D(k)}{\left( \sum_k \pi(k) L_E(k) \right)
 \end{aligned} \tag{56}
 \end{equation}
 结合式18，这证明了式20。在没有恢复查询时，\(L_D(k) = 1\)，所以 \(\zeta_{q,0} = 0\)；两个预言机游戏重合，且 \(\delta_{\mathrm{dec}}(q, 0) = 0\)。因此 \(Q_d = 0\) 总是恢复仅生成基线，而正的恢复允许量需要相应的分布条件。
-

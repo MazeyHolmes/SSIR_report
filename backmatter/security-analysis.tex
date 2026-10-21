@@ -10,7 +10,7 @@ SSIR使用选定神经元的分组响应来表示图像密钥下的消息。
 附录A通过与操作域上的固定仿射映射进行比较，阐明了这种相互作用。
 
 \textbf{2) DNN响应的离散使用：}
-受密码操作神经实现[7]的启发，SSIR通过IV-C1节中定义的分组编码将连续DNN响应连接到离散消息状态。
+受密码操作神经实现\supercite{7-gerault-et-al-2026}的启发，SSIR通过IV-C1节中定义的分组编码将连续DNN响应连接到离散消息状态。
 令 \(\mathcal{M}\) 为支持的等长消息空间，具有双射编码 \(\mathrm{Et} : \mathcal{M} \to \{0,1\}^\ell\)，\(C_{\mathrm{fp}}\) 为有限固定精度密文图像域，\(\mathcal{K} = \mathrm{supp}(\mathrm{KeyGen})\) 为合法图像密钥域。
 我们考虑支持的配置，其中对于每个 \(k \in \mathcal{K}\) 和 \(m \in \mathcal{M}\)，生成以正概率成功。
 定义
